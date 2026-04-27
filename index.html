@@ -1,0 +1,680 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>森のカフェ — 静けさと香りのひととき</title>  
+  <meta name="description" content="森のカフェ。路地裏の小さな焙煎所と喫茶。朝の一杯から夜のデザートまで、豆と時間に誠実に向き合うカフェ。" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=Zen+Kaku+Gothic+New:wght@400;500;700&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --ink: #1a1410;
+      --paper: #f4efe6;
+      --paper-deep: #e8dfd2;
+      --accent: #b85c38;
+      --accent-soft: #c97b5a;
+      --moss: #3d4a3a;
+      --cream: #faf7f2;
+      --shadow: rgba(26, 20, 16, 0.12);
+      --font-display: "Cormorant Garamond", "Times New Roman", serif;
+      --font-body: "Zen Kaku Gothic New", "Hiragino Sans", sans-serif;
+      --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
+    }
+
+    *,
+    *::before,
+    *::after {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      color: var(--ink);
+      background: var(--paper);
+      font-family: var(--font-body);
+      font-size: 15px;
+      line-height: 1.75;
+      letter-spacing: 0.02em;
+      overflow-x: hidden;
+    }
+
+    /* Film grain overlay */
+    body::after {
+      content: "";
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      opacity: 0.045;
+      z-index: 9999;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    img {
+      max-width: 100%;
+      height: auto;
+      display: block;
+    }
+
+    /* ----- Nav ----- */
+    .nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 100;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 1.25rem 4vw;
+      mix-blend-mode: difference;
+      color: #fff;
+      transition: transform 0.5s var(--ease-out);
+    }
+
+    .nav-logo {
+      font-family: var(--font-body);
+      font-size: clamp(0.95rem, 2vw, 1.1rem);
+      font-weight: 700;
+      letter-spacing: 0.12em;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 2rem;
+      font-size: 0.78rem;
+      font-weight: 500;
+      letter-spacing: 0.12em;
+    }
+
+    .nav-links a {
+      position: relative;
+    }
+
+    .nav-links a::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      bottom: -4px;
+      width: 0;
+      height: 1px;
+      background: currentColor;
+      transition: width 0.35s var(--ease-out);
+    }
+
+    .nav-links a:hover::after {
+      width: 100%;
+    }
+
+    @media (max-width: 640px) {
+      .nav-links {
+        display: none;
+      }
+    }
+
+    /* ----- Hero ----- */
+    .hero {
+      min-height: 100vh;
+      display: grid;
+      grid-template-columns: 1fr 1.05fr;
+      align-items: stretch;
+      background: linear-gradient(145deg, var(--cream) 0%, var(--paper) 45%, var(--paper-deep) 100%);
+    }
+
+    @media (max-width: 900px) {
+      .hero {
+        grid-template-columns: 1fr;
+        min-height: auto;
+      }
+    }
+
+    .hero-copy {
+      padding: clamp(6rem, 14vw, 10rem) 4vw clamp(3rem, 8vw, 6rem);
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      position: relative;
+    }
+
+    .hero-copy::before {
+      content: "";
+      position: absolute;
+      top: 18%;
+      left: 8%;
+      width: 120px;
+      height: 1px;
+      background: var(--accent);
+      opacity: 0.5;
+      transform-origin: left;
+      animation: lineGrow 1.2s var(--ease-out) 0.3s both;
+    }
+
+    @keyframes lineGrow {
+      from {
+        transform: scaleX(0);
+      }
+      to {
+        transform: scaleX(1);
+      }
+    }
+
+    .hero-eyebrow {
+      font-size: 0.72rem;
+      letter-spacing: 0.35em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 1.5rem;
+      opacity: 0;
+      animation: fadeUp 0.9s var(--ease-out) 0.15s forwards;
+    }
+
+    .hero h1 {
+      font-family: var(--font-display);
+      font-weight: 400;
+      font-size: clamp(2.8rem, 7vw, 4.5rem);
+      line-height: 1.08;
+      margin: 0 0 1.5rem;
+      letter-spacing: 0.02em;
+      opacity: 0;
+      animation: fadeUp 0.95s var(--ease-out) 0.35s forwards;
+    }
+
+    .hero h1 span {
+      display: block;
+      font-style: italic;
+      font-size: 0.55em;
+      color: var(--moss);
+      margin-top: 0.35rem;
+      letter-spacing: 0.08em;
+    }
+
+    .hero-lead {
+      max-width: 22em;
+      color: #4a4238;
+      font-size: 0.95rem;
+      margin-bottom: 2.5rem;
+      opacity: 0;
+      animation: fadeUp 1s var(--ease-out) 0.55s forwards;
+    }
+
+    @keyframes fadeUp {
+      from {
+        opacity: 0;
+        transform: translateY(18px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .hero-cta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+      align-items: center;
+      opacity: 0;
+      animation: fadeUp 1s var(--ease-out) 0.75s forwards;
+    }
+
+    .btn-primary {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 1rem 2.2rem;
+      background: var(--ink);
+      color: var(--paper);
+      font-size: 0.75rem;
+      font-weight: 700;
+      letter-spacing: 0.2em;
+      border: none;
+      cursor: pointer;
+      transition: transform 0.35s var(--ease-out), box-shadow 0.35s;
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 12px 32px var(--shadow);
+    }
+
+    .btn-ghost {
+      font-size: 0.75rem;
+      font-weight: 500;
+      letter-spacing: 0.15em;
+      border-bottom: 1px solid var(--ink);
+      padding-bottom: 2px;
+      transition: color 0.25s, border-color 0.25s;
+    }
+
+    .btn-ghost:hover {
+      color: var(--accent);
+      border-color: var(--accent);
+    }
+
+    .hero-visual {
+      position: relative;
+      min-height: 70vh;
+    }
+
+    @media (max-width: 900px) {
+      .hero-visual {
+        min-height: 52vh;
+      }
+    }
+
+    .hero-visual-inner {
+      position: absolute;
+      inset: 0;
+      background:
+        linear-gradient(120deg, transparent 40%, rgba(244, 239, 230, 0.15) 100%),
+        radial-gradient(ellipse 80% 60% at 70% 40%, rgba(184, 92, 56, 0.18), transparent 55%),
+        linear-gradient(160deg, var(--moss) 0%, #2a3328 100%);
+    }
+
+    .hero-visual-inner::before {
+      content: "";
+      position: absolute;
+      inset: 12% 8% 8% 18%;
+      border: 1px solid rgba(244, 239, 230, 0.25);
+      pointer-events: none;
+    }
+
+    .hero-stamp {
+      position: absolute;
+      bottom: 14%;
+      left: 10%;
+      font-family: var(--font-display);
+      font-style: italic;
+      font-size: clamp(3rem, 8vw, 5.5rem);
+      color: rgba(244, 239, 230, 0.12);
+      line-height: 1;
+      pointer-events: none;
+      transform: rotate(-8deg);
+    }
+
+    .hero-badge {
+      position: absolute;
+      top: 28%;
+      right: 12%;
+      width: 88px;
+      height: 88px;
+      border-radius: 50%;
+      border: 1px solid rgba(244, 239, 230, 0.4);
+      display: grid;
+      place-items: center;
+      font-size: 0.62rem;
+      letter-spacing: 0.12em;
+      text-align: center;
+      color: var(--paper);
+      line-height: 1.45;
+      animation: floatBadge 5s ease-in-out infinite;
+    }
+
+    @keyframes floatBadge {
+      0%,
+      100% {
+        transform: translateY(0);
+      }
+      50% {
+        transform: translateY(-8px);
+      }
+    }
+
+    /* ----- Story ----- */
+    .section {
+      padding: clamp(4rem, 10vw, 7rem) 4vw;
+    }
+
+    .story {
+      max-width: 1100px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) minmax(0, 1.1fr);
+      gap: clamp(2rem, 5vw, 4rem);
+      align-items: start;
+    }
+
+    @media (max-width: 768px) {
+      .story {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .story-label {
+      font-family: var(--font-display);
+      font-size: clamp(2rem, 4vw, 2.75rem);
+      font-style: italic;
+      color: var(--moss);
+      line-height: 1.2;
+    }
+
+    .story-body p {
+      margin: 0 0 1.25rem;
+      color: #3d3830;
+    }
+
+    .story-body p:last-child {
+      margin-bottom: 0;
+    }
+
+    /* ----- Menu ----- */
+    .menu-wrap {
+      background: var(--ink);
+      color: var(--paper);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .menu-wrap::before {
+      content: "";
+      position: absolute;
+      top: -50%;
+      right: -20%;
+      width: 60%;
+      height: 120%;
+      background: radial-gradient(circle, rgba(184, 92, 56, 0.12) 0%, transparent 65%);
+      pointer-events: none;
+    }
+
+    .menu-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+      position: relative;
+      z-index: 1;
+    }
+
+    .menu-header {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      align-items: baseline;
+      gap: 1rem;
+      margin-bottom: 3rem;
+      border-bottom: 1px solid rgba(244, 239, 230, 0.15);
+      padding-bottom: 1.5rem;
+    }
+
+    .menu-header h2 {
+      font-family: var(--font-display);
+      font-weight: 400;
+      font-size: clamp(2rem, 4vw, 3rem);
+      margin: 0;
+      letter-spacing: 0.04em;
+    }
+
+    .menu-header span {
+      font-size: 0.72rem;
+      letter-spacing: 0.25em;
+      opacity: 0.65;
+    }
+
+    .menu-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.5rem;
+    }
+
+    @media (max-width: 900px) {
+      .menu-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .menu-card {
+      background: rgba(244, 239, 230, 0.06);
+      border: 1px solid rgba(244, 239, 230, 0.1);
+      padding: 1.75rem 1.5rem;
+      transition: transform 0.4s var(--ease-out), border-color 0.35s;
+    }
+
+    .menu-card:nth-child(2) {
+      transform: translateY(1.5rem);
+    }
+
+    @media (max-width: 900px) {
+      .menu-card:nth-child(2) {
+        transform: none;
+      }
+    }
+
+    .menu-card:hover {
+      transform: translateY(-6px);
+      border-color: rgba(184, 92, 56, 0.45);
+    }
+
+    .menu-card:nth-child(2):hover {
+      transform: translateY(calc(1.5rem - 6px));
+    }
+
+    @media (max-width: 900px) {
+      .menu-card:nth-child(2):hover {
+        transform: translateY(-6px);
+      }
+    }
+
+    .menu-card h3 {
+      font-family: var(--font-display);
+      font-size: 1.5rem;
+      font-weight: 600;
+      margin: 0 0 0.5rem;
+      color: var(--accent-soft);
+    }
+
+    .menu-card p {
+      margin: 0;
+      font-size: 0.88rem;
+      opacity: 0.82;
+      line-height: 1.65;
+    }
+
+    .menu-price {
+      margin-top: 1.25rem;
+      font-size: 0.75rem;
+      letter-spacing: 0.15em;
+      opacity: 0.55;
+    }
+
+    /* ----- Hours / Visit ----- */
+    .visit {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0;
+      min-height: 420px;
+    }
+
+    @media (max-width: 768px) {
+      .visit {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .visit-panel {
+      padding: clamp(3rem, 8vw, 5rem);
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    .visit-panel:first-child {
+      background: var(--paper-deep);
+    }
+
+    .visit-panel:last-child {
+      background: var(--cream);
+      border-left: 1px solid rgba(26, 20, 16, 0.08);
+    }
+
+    @media (max-width: 768px) {
+      .visit-panel:last-child {
+        border-left: none;
+        border-top: 1px solid rgba(26, 20, 16, 0.08);
+      }
+    }
+
+    .visit-panel h2 {
+      font-family: var(--font-display);
+      font-size: clamp(1.75rem, 3vw, 2.25rem);
+      font-weight: 400;
+      margin: 0 0 1.5rem;
+    }
+
+    .hours-row {
+      display: flex;
+      justify-content: space-between;
+      gap: 1rem;
+      padding: 0.65rem 0;
+      border-bottom: 1px solid rgba(26, 20, 16, 0.1);
+      font-size: 0.9rem;
+    }
+
+    .hours-row:last-of-type {
+      border-bottom: none;
+    }
+
+    .address {
+      font-style: normal;
+      line-height: 1.85;
+      color: #4a4238;
+      margin-bottom: 1.5rem;
+    }
+
+    .map-note {
+      font-size: 0.8rem;
+      color: var(--accent);
+      letter-spacing: 0.08em;
+    }
+
+    /* ----- Footer ----- */
+    footer {
+      padding: 2.5rem 4vw 3rem;
+      text-align: center;
+      background: var(--ink);
+      color: rgba(244, 239, 230, 0.55);
+      font-size: 0.72rem;
+      letter-spacing: 0.18em;
+    }
+
+    footer .footer-brand {
+      font-family: var(--font-body);
+      font-size: 1rem;
+      font-weight: 700;
+      letter-spacing: 0.18em;
+      color: var(--paper);
+      margin-bottom: 0.75rem;
+    }
+  </style>
+</head>
+<body>
+  <header class="nav">
+    <a href="#" class="nav-logo">森のカフェ</a>
+    <nav class="nav-links" aria-label="主要ナビゲーション">
+      <a href="#story">ことば</a>
+      <a href="#menu">お品書き</a>
+      <a href="#visit">店舗</a>
+    </nav>
+  </header>
+
+  <section class="hero" aria-labelledby="hero-title">
+    <div class="hero-copy">
+      <p class="hero-eyebrow">ご家族でどうぞ</p>
+      <h1 id="hero-title">
+        休日のカフェ時間、<br />ちいさな冒険のあとに。
+        <span>森のカフェ — 東京・谷中</span>
+      </h1>
+      <p class="hero-lead">
+        お子さま連れでも気軽にどうぞ。キッズドリンクに、みんなで分けられるスイーツ、甘さ控えめのメニューもあります。ママ・パパはデカフェで一息。公園の帰りや、週末のブランチにふらっと寄ってみてください。
+      </p>
+      <div class="hero-cta">
+        <a class="btn-primary" href="#visit">来店情報</a>
+        <a class="btn-ghost" href="#menu">お子さまメニューを見る</a>
+      </div>
+    </div>
+    <div class="hero-visual" aria-hidden="true">
+      <div class="hero-visual-inner"></div>
+      <p class="hero-stamp">since<br />2018</p>
+      <div class="hero-badge" role="presentation">
+        Single<br />Origin<br />Weekly
+      </div>
+    </div>
+  </section>
+
+  <section id="story" class="section story" aria-labelledby="story-title">
+    <h2 id="story-title" class="story-label">豆と人と、光のさし方。</h2>
+    <div class="story-body">
+      <p>
+        森のカフェは、産地ごとの個性をそのままに味わえるよう、浅めから中深まで焙煎の「止め」を微調整しています。エスプレッソは扱わず、ハンドドリップとネル、それにフランス式のプレスのみ。抽出は一杯ずつ、目の前で。
+      </p>
+      <p>
+        カウンター奥の焙煎機は開店前と閉店後に火が入ります。焙煎の日には、朝の空気に焦げ香が混ざります。その日の気温と湿度に合わせてプロファイルを少しずつ変えるのが、私たちの日課です。
+      </p>
+    </div>
+  </section>
+
+  <section id="menu" class="section menu-wrap" aria-labelledby="menu-title">
+    <div class="menu-inner">
+      <div class="menu-header">
+        <h2 id="menu-title">お品書き</h2>
+        <span>Family / 2026 Spring</span>
+      </div>
+      <div class="menu-grid">
+        <article class="menu-card">
+          <h3>ママ・パパの一杯</h3>
+          <p>本日のドリップ、カフェオレ、デカフェ。豆は日替わりでご案内。お子さまのお昼寝タイムに、香りでほっと一息つける一杯を。</p>
+          <p class="menu-price">¥580 — ¥820（デカフェ +¥50）</p>
+        </article>
+        <article class="menu-card">
+          <h3>キッズ＆ジュニア</h3>
+          <p>ホットミルク、フルーツソーダ、ミルクセーキ。小さめカップとストロー付き。甘さは「やさしめ」「ふつう」からお選びいただけます。</p>
+          <p class="menu-price">¥350 — ¥520</p>
+        </article>
+        <article class="menu-card">
+          <h3>みんなでシェア</h3>
+          <p>パンケーキプレート、フレンチトースト、季節のフルーツと焼き菓子の盛り合わせ。兄弟で分け合ったり、おやつタイムにちょうどいい分量です。</p>
+          <p class="menu-price">¥780 — ¥1,280</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section id="visit" class="visit" aria-labelledby="visit-title">
+    <div class="visit-panel">
+      <h2 id="visit-title">営業時間</h2>
+      <div class="hours-row">
+        <span>月 — 木</span>
+        <span>10:00 — 19:00（L.O. 18:30）</span>
+      </div>
+      <div class="hours-row">
+        <span>金 — 日・祝</span>
+        <span>9:00 — 21:00（L.O. 20:30）</span>
+      </div>
+      <div class="hours-row">
+        <span>定休日</span>
+        <span>火曜（祝日の場合は翌水曜）</span>
+      </div>
+    </div>
+    <div class="visit-panel">
+      <h2>所在地</h2>
+      <address class="address">
+        〒110-0001 東京都台東区谷中○丁目○番○号<br />
+        千駄木駅より徒歩7分 / 日暮里駅より徒歩11分
+      </address>
+      <p class="map-note">※ 住所・駅名はデモ用の架空表記です。実店舗ではありません。</p>
+    </div>
+  </section>
+
+  <footer>
+    <p class="footer-brand">森のカフェ</p>
+    <p>© 森のカフェ — デモランディングページ</p>
+  </footer>
+</body>
+</html>

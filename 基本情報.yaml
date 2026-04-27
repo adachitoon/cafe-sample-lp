@@ -1,0 +1,52 @@
+# 森のカフェ — 基本情報（デモサイト掲載内容の整理）
+# ソース: index.html と同期してください
+
+notice: |
+  以下はランディングページ（デモ）に掲載している内容の整理です。
+  住所は架空表記であり、実在店舗ではありません。
+
+store:
+  name: 森のカフェ
+  catchphrase: 休日のカフェ時間、ちいさな冒険のあとに。
+  area_label: 東京・谷中（ヒーロー文言）
+  page_title: 森のカフェ — 静けさと香りのひととき
+  meta_description: 森のカフェ。路地裏の小さな焙煎所と喫茶。朝の一杯から夜のデザートまで、豆と時間に誠実に向き合うカフェ。
+
+concept:
+  appeal: ご家族でどうぞ（ファミリー歓迎）
+  atmosphere: お子さま連れでも気軽に。キッズドリンク、シェア向きスイーツ、甘さ控えめメニュー。ママ・パパ向けデカフェ。公園帰り・週末ブランチ向け。
+  coffee_focus: 産地の個性を活かす焙煎（浅〜中深）。エスプレッソは扱わず、ハンドドリップ・ネル・フレンチプレスのみ。店内焙煎（開店前・閉店後）。
+
+business_hours:
+  mon_thu: "10:00 — 19:00（L.O. 18:30）"
+  fri_sun_holiday: "9:00 — 21:00（L.O. 20:30）"
+  regular_closed: 火曜（祝日の場合は翌水曜）
+
+location_demo:
+  note: 住所・駅名はデモ用の架空表記
+  postal_address: 〒110-0001 東京都台東区谷中○丁目○番○号
+  access: 千駄木駅より徒歩7分 / 日暮里駅より徒歩11分
+
+menu_season_label: Family / 2026 Spring
+
+menu:
+  - name: ママ・パパの一杯
+    summary: 本日のドリップ、カフェオレ、デカフェ（豆は日替わり）
+    price_display: "¥580 — ¥820（デカフェ +¥50）"
+  - name: キッズ＆ジュニア
+    summary: ホットミルク、フルーツソーダ、ミルクセーキ（小さめカップ・ストロー、甘さ選択可）
+    price_display: "¥350 — ¥520"
+  - name: みんなでシェア
+    summary: パンケーキプレート、フレンチトースト、季節フルーツと焼き菓子の盛り合わせ
+    price_display: "¥780 — ¥1,280"
+
+site_decorations:
+  opened_since_label: since 2018
+  hero_badge_lines:
+    - Single
+    - Origin
+    - Weekly
+
+source:
+  primary: index.html
+  note: 更新する場合は HTML と本ファイルを揃えてください
